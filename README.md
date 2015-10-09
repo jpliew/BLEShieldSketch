@@ -23,11 +23,11 @@ Execute Arduino IDE, upload HM_10_Test.ino sketch.
 
 ## Testing
 
-After the sketch has been successfully uploaded, open Serial Monitor in Arduino IDE using 9600 baud rate. The Serial Monitor will display as result similar to the image below:
+After the sketch has been successfully uploaded, open Serial Monitor in Arduino IDE using 9600 baud rate. The Serial Monitor will display results similar to the image below:
 
 ![BLE Shield Serial Monitor] (http://www.monkeyboard.org/shop/images/BLE_Shield_Serial_Monitor.png)
 
-Using a BLE enabled phone, pair and connect to the BLE Shield.  The name and password for this example as seen from the image is *BLE Shield* and *000000* respectively. When the phone is connected to the BLE Shield, on the Serial Monitor, *OK+CONN* will be displayed. 
+Using a BLE enabled phone, pair and connect to the BLE Shield.  The name and password for this example as seen from the result is **BLE Shield** and *000000* respectively. When the phone is connected to the BLE Shield, on the Serial Monitor, *OK+CONN* will be displayed. 
 
 ## Contributors
 
