@@ -61,7 +61,7 @@ boolean ReadBLE(long timeout, char* command, char* temp) {
 			temp[i]=a;					// save data to buffer
 			i++;
 			if (i>DATALEN) break;   	// prevent buffer overflow, need to break
-			delay(1);					// give it a 1ms delay before reading next character
+			delay(2);					// give it a 2ms delay before reading next character
 		}
 		Serial.print("BLE reply=");
 		Serial.println(temp);

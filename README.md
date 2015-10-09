@@ -11,17 +11,23 @@ The following are needed
 
 ## Installation 
 
-connection diagram (TODO)
+![BLE Shield Jumper Setting](http://www.monkeyboard.org/shop/images/BLE_Shield_Jumper.jpg)
 
-download test code (TODO)
+1. Set power switch to 5V when using Arduino UNO.
+2. Set HM-10 TX and RX to D2 and D3 respectively as shown.
+3. Save HM_10_Test.ino to your local computer.
 
 ## Arduino Sketch
 
-Execute Arduino IDE, upload this sketch
+Execute Arduino IDE, upload HM_10_Test.ino sketch.
 
 ## Testing
 
-(TODO)
+After the sketch has been successfully uploaded, open Serial Monitor in Arduino IDE using 9600 baud rate. The Serial Monitor will display as result similar to the image below:
+
+![BLE Shield Serial Monitor] (http://www.monkeyboard.org/shop/images/BLE_Shield_Serial_Monitor.png)
+
+Using a BLE enabled phone, pair and connect to the BLE Shield.  The name and password for this example as seen from the image is *BLE Shield* and *000000* respectively. When the phone is connected to the BLE Shield, on the Serial Monitor, *OK+CONN* will be displayed. 
 
 ## Contributors
 
