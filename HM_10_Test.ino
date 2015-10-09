@@ -1,5 +1,5 @@
 /*
-	Arduino BLE Shield (HM-10) Sketch
+	Arduino BLE Shield (HM-10) Testing Sketch
 	by JP Liew http://jpliew.com
 
 	This program is free software: you can redistribute it and/or modify
@@ -18,16 +18,30 @@
 
 #include <SoftwareSerial.h>
 
-#define DATALEN 100
+#define BUFFER_LENGTH 100
 
 SoftwareSerial ble(2,3);				// HM10 TX pin to Arduino D2, HM10 RX pin to Arduino D3
-char buffer[DATALEN];					// Buffer to store response
+char buffer[BUFFER_LENGTH];				// Buffer to store response
 int timeout=800; 						// Wait 800ms each time for BLE to response, depending on your application, adjust this value accordingly
+long bauds[] = {9600,57600,115200,38400,2400,4800,19200};	// common baud rates, when using HM-10 module with SoftwareSerial, try not to go over 57600
 
-boolean IsBLEReady() {
-	// The problem with this BLE Shield is the HM-10 module does not response with CR LF at the end of the response,
-	// so a timeout is required to prevent the loop locking up.
-	ReadBLE(timeout, "AT" ,buffer);		// Send AT and store response to buffer 
+long BLEAutoBaud() {
+	int baudcount=sizeof(bauds)/sizeof(long);
+	for(int i=0; i<baudcount; i++) {
+		for(int x=0; x<3; x++) { 		// test at least 3 times for each baud
+			Serial.print("Testing baud ");
+			Serial.println(bauds[i]);
+			ble.begin(bauds[i]);
+			if (BLEIsReady()) {
+				return bauds[i];
+			}
+		}
+	}
+	return -1;
+}
+			
+boolean BLEIsReady() {
+	BLECmd(timeout, "AT" ,buffer);		// Send AT and store response to buffer 
 	if (strcmp(buffer,"OK")==0){		
 		return true;
 	} else {
@@ -35,19 +49,22 @@ boolean IsBLEReady() {
 	}  
 }
 
-boolean ReadBLE(long timeout, char* command, char* temp) {
-	long endTime;
+boolean BLECmd(long timeout, char* command, char* temp) {
+	long endtime;
 	boolean found=false;
-	endTime=millis()+timeout;			// 
+	endtime=millis()+timeout;			// 
 	memset(temp,0,100);					// clear buffer
 	found=true;
 	Serial.print("Arduino send=");
 	Serial.println(command);
 	ble.print(command);
-	delay(1);
+	
 	// The loop below wait till either a response is received or timeout
+	// The problem with this BLE Shield is the HM-10 module does not response with CR LF at the end of the response,
+	// so a timeout is required to detect end of response and also prevent the loop locking up.
+
 	while(!ble.available()){
-		if(millis()>endTime) {			// timeout, break
+		if(millis()>endtime) {			// timeout, break
 			found=false;
 			break;
 		}
@@ -60,8 +77,8 @@ boolean ReadBLE(long timeout, char* command, char* temp) {
 			// Serial.print((char)a);	// Uncomment this to see raw data from BLE
 			temp[i]=a;					// save data to buffer
 			i++;
-			if (i>DATALEN) break;   	// prevent buffer overflow, need to break
-			delay(2);					// give it a 2ms delay before reading next character
+			if (i>BUFFER_LENGTH) break;	// prevent buffer overflow, need to break
+			delay(1);					// give it a 1ms delay before reading next character
 		}
 		Serial.print("BLE reply=");
 		Serial.println(temp);
@@ -73,30 +90,35 @@ boolean ReadBLE(long timeout, char* command, char* temp) {
 }
 
 void setup() {
-	ble.begin(9600);  // Iteaduino BLE Shield default 9600 Baud Rate
 	Serial.begin(9600); 
-	while(!IsBLEReady()){
-		// Not doing anything until BLE is ready
-		// This part will locked up until BLE is ready, no point to move forward if there is a problem with the BLE
-		// If you see on Serial Monitor lots of BLE timeout, most likely your have a bad shield
-		// Check if the shield JUMPER is correctly set to 
-		// HM10 TX to D2
-		// HM10 RX to D3
-	} 
-	
+
+	// If you see lots of BLE timeout on Serial Monitor after BLEAutoBaud completed, most likely your have a bad shield
+	// Check if the shield JUMPER is correctly set to 
+	// HM10 TX to D2
+	// HM10 RX to D3
+	long baudrate = BLEAutoBaud();
+
+	if (baudrate>0) {
+		Serial.print("Found BLE baud rate ");
+		Serial.println(baudrate);
+	} else {
+		Serial.println("No BLE detected.");
+		while(1){};						// No BLE found, just going to stop here
+	}
+
 	// The following commands are just to demonstrate the shield is working properly,
 	// in actual application, only call those that are needed by your application.
 	// Check HM-10 datasheet for the description of the commands.
-	ReadBLE(timeout,"AT+NAME?",buffer);
-	ReadBLE(timeout,"AT+BAUD?",buffer);
-	ReadBLE(timeout,"AT+MODE?",buffer);
-	ReadBLE(timeout,"AT+PASS?",buffer);
-	ReadBLE(timeout,"AT+VERS?",buffer);
-	ReadBLE(timeout,"AT+RADD?",buffer);
-	ReadBLE(timeout,"AT+ADDR?",buffer);
-	ReadBLE(timeout,"AT+TYPE?",buffer);
-	ReadBLE(timeout,"AT+POWE?",buffer);
-	ReadBLE(timeout,"AT+NOTI1",buffer);
+	BLECmd(timeout,"AT+NAME?",buffer);
+	BLECmd(timeout,"AT+BAUD?",buffer);
+	BLECmd(timeout,"AT+MODE?",buffer);
+	BLECmd(timeout,"AT+PASS?",buffer);
+	BLECmd(timeout,"AT+VERS?",buffer);
+	BLECmd(timeout,"AT+RADD?",buffer);
+	BLECmd(timeout,"AT+ADDR?",buffer);
+	BLECmd(timeout,"AT+TYPE?",buffer);
+	BLECmd(timeout,"AT+POWE?",buffer);
+	BLECmd(timeout,"AT+NOTI1",buffer);
 	Serial.println("----------------------");
 	Serial.println("Waiting for remote connection...");
 }
@@ -105,5 +127,4 @@ void loop() {
 	if (ble.available()) {
 		Serial.print((char)ble.read());
 	}  
-
 }
