@@ -20,7 +20,9 @@
 
 #define BUFFER_LENGTH 100
 
-SoftwareSerial ble(2,3);				// HM10 TX pin to Arduino D2, HM10 RX pin to Arduino D3
+SoftwareSerial ble(2,3);				// For Uno, HM10 TX pin to Arduino Uno pin D2, HM10 RX pin to Arduino Uno pin D3
+//SoftwareSerial ble(10,11);			// For Mega 2560, HM10 TX pin to Arduino Mega 2650 pin D10, HM10 RX pin to Arduino Mega 2560 pin D11
+
 char buffer[BUFFER_LENGTH];				// Buffer to store response
 int timeout=800; 						// Wait 800ms each time for BLE to response, depending on your application, adjust this value accordingly
 long bauds[] = {9600,57600,115200,38400,2400,4800,19200};	// common baud rates, when using HM-10 module with SoftwareSerial, try not to go over 57600

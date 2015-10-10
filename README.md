@@ -11,11 +11,30 @@ The following are needed
 
 ## Installation 
 
+For Arduino UNO, please use the following jumper configuration:
+
 ![BLE Shield Jumper Setting](http://www.monkeyboard.org/shop/images/BLE_Shield_Jumper.jpg)
+
+For Arduino Mega 2560, please use the following jumper configuration:
+
+![BLE Shield Arduino Mega 2560 Setting] (http://www.monkeyboard.org/shop/images/BLE_Shield_Mega2560.jpg)
 
 1. Set power switch to 5V when using Arduino UNO.
 2. Set HM-10 TX and RX to D2 and D3 respectively as shown.
 3. Save HM_10_Test.ino to your local computer.
+4. If you are using Arduino Mega 2560, change the code 
+
+```
+SoftwareSerial ble(2,3);				// For Uno, HM10 TX pin to Arduino Uno pin D2, HM10 RX pin to Arduino Uno pin D3
+//SoftwareSerial ble(10,11);			// For Mega 2560, HM10 TX pin to Arduino Mega 2650 pin D10, HM10 RX pin to Arduino Mega 2560 pin D11
+```
+
+to 
+
+```
+//SoftwareSerial ble(2,3);				// For Uno, HM10 TX pin to Arduino Uno pin D2, HM10 RX pin to Arduino Uno pin D3
+SoftwareSerial ble(10,11);				// For Mega 2560, HM10 TX pin to Arduino Mega 2650 pin D10, HM10 RX pin to Arduino Mega 2560 pin D11
+```
 
 ## Arduino Sketch
 
