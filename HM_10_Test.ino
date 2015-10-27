@@ -80,7 +80,7 @@ boolean BLECmd(long timeout, char* command, char* temp) {
 			temp[i]=a;					// save data to buffer
 			i++;
 			if (i>=BUFFER_LENGTH) break;	// prevent buffer overflow, need to break
-			delay(1);					// give it a 1ms delay before reading next character
+			delay(1);						// give it a 2ms delay before reading next character
 		}
 		Serial.print("BLE reply    = ");
 		Serial.println(temp);
@@ -129,6 +129,5 @@ void loop() {
 	if (ble.available()) {
 		char c =(char)ble.read();
 		Serial.print(c);
-		ble.write(c);
 	}  
 }

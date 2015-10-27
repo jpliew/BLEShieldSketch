@@ -1,6 +1,4 @@
-# Arduino BLE Shield (HM-10) Sketch
-
-
+# Arduino BLE Shield (HM-10) Testing Sketch
 
 ## Requirements
 
