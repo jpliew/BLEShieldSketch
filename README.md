@@ -50,10 +50,10 @@ Using a BLE enabled phone, pair and connect to the BLE Shield.  The name and pas
 
 * Windows Phone 8.1 with [Bluetooth LE Explorer sample code.] (https://code.msdn.microsoft.com/Bluetooth-LE-Explorer-91669105)
 * Asus Zenphone 2 Android 5.0 with [Nordic nRF Master Control Panel] (https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp&hl=en)
-  * Step 1, execute nRF Master Control Panel, click connect on "BLE Shield" (Shield's default name)
-	![Connect to BLE](http://www.monkeyboard.org/images/android_ble/android_ble_01.png)
+  * Step 1, execute nRF Master Control Panel, click connect on "BLE Shield", Shield's default name
+    ![Connect to BLE](http://www.monkeyboard.org/images/android_ble/android_ble_01.png)
   * Step 2, once connected, click on "Unknown Service" UUID 0000ffe0-0000-1000-8000-00805f9b34fb
-    ![Click Unknown Service] ((http://www.monkeyboard.org/images/android_ble/android_ble_02.png))
+    ![Click Unknown Service] (http://www.monkeyboard.org/images/android_ble/android_ble_02.png)
   * Step 3, click WRITE (shown as UP ARROW BUTTON)
     ![Click WRITE] (http://www.monkeyboard.org/images/android_ble/android_ble_03.png)
   * Step 4, select BYTE
