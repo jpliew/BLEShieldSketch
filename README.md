@@ -62,7 +62,7 @@ Step 2, once connected, click on "Unknown Service" UUID 0000ffe0-0000-1000-8000-
 
 ![Click Unknown Service] (http://www.monkeyboard.org/images/android_ble/android_ble_02.png)
 
-Step 3, click WRITE, shown as UP ARROW BUTTON
+Step 3, click WRITE, shown as UP ARROW BUTTON beside Unknown Characteristic
 
 ![Click WRITE] (http://www.monkeyboard.org/images/android_ble/android_ble_03.png)
 
