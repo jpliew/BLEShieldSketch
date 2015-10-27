@@ -94,6 +94,9 @@ boolean BLECmd(long timeout, char* command, char* temp) {
 void setup() {
 	Serial.begin(9600); 
 
+	pinMode(13, OUTPUT);
+	digitalWrite(13,LOW);
+
 	// If you see lots of BLE timeout on Serial Monitor after BLEAutoBaud completed, most likely your have a bad shield
 	// Check if the shield JUMPER is correctly set to 
 	// HM10 TX to D2
@@ -129,5 +132,7 @@ void loop() {
 	if (ble.available()) {
 		char c =(char)ble.read();
 		Serial.print(c);
+		if (c=='1') digitalWrite(13,HIGH);		// if received character 1 from BLE, set PIN 13 high
+		if (c=='0') digitalWrite(13,LOW);		// if received character 0 from BLE, set PIN 13 low
 	}  
 }
