@@ -55,18 +55,23 @@ Using a BLE enabled phone, pair and connect to the BLE Shield.  The name and pas
 ## Android Instruction
 
 Step 1, execute nRF Master Control Panel, click connect on "BLE Shield", Shield's default name
+
 ![Connect to BLE](http://www.monkeyboard.org/images/android_ble/android_ble_01.png)
 
 Step 2, once connected, click on "Unknown Service" UUID 0000ffe0-0000-1000-8000-00805f9b34fb
+
 ![Click Unknown Service] (http://www.monkeyboard.org/images/android_ble/android_ble_02.png)
 
 Step 3, click WRITE, shown as UP ARROW BUTTON
+
 ![Click WRITE] (http://www.monkeyboard.org/images/android_ble/android_ble_03.png)
 
 Step 4, select BYTE
+
 ![Select BYTE] (http://www.monkeyboard.org/images/android_ble/android_ble_04.png)
 
 Step 5, type 31, (hex code 0x31 is ASCII 1), and click SEND
+
 ![Type 0x31] (http://www.monkeyboard.org/images/android_ble/android_ble_05.png)
 
 Check for LED on D13 of Arduino turned on. Send 0x30 to turn off the LED.
