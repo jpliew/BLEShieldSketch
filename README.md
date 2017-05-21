@@ -15,7 +15,7 @@ For Arduino UNO, please use the following jumper configuration:
 
 For Arduino Mega 2560, please use the following jumper configuration:
 
-![BLE Shield Arduino Mega 2560 Setting] (http://www.monkeyboard.org/shop/images/BLE_Shield_Mega2560.jpg)
+![BLE Shield Arduino Mega 2560 Setting](http://www.monkeyboard.org/shop/images/BLE_Shield_Mega2560.jpg)
 
 1. Set power switch to 5V when using Arduino UNO.
 2. Set HM-10 TX and RX to D2 and D3 respectively as shown.
